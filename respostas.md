@@ -92,12 +92,16 @@ PS C:\Users\Aluno\Downloads\01.A - Projeto_Avaliação\01.1 - Projeto_Avaliaçã
 ================================================================
  Matrícula 261217952 · portal 8052 · blog 9052 · manutenção 7052
 
+================================================================
+ Verificador · Avaliação Prática de Docker · Turma A
+================================================================
+ Matrícula 261217952 · portal 8052 · blog 9052 · manutenção 7052
+
 A. Arquivos, imagens e Git
-[ OK ] A1 portal/Dockerfile segue os requisitos
+[ OK ] A1 portal/Dockerfile segue os requisitos                                                                                                                                 
 [ OK ] A2 imagem manutencao:261217952 corrigida e servindo o aviso                                                                                                              
-[FALHA] A3 .env fora do Git e .env.example versionado                                                                                                                           
-         -> confira o .gitignore e rode: git ls-files                                                                                                                           
-[ OK ] A4 5+ commits e remoto no GitHub (encontrados: 8)                                                                                                                        
+[ OK ] A3 .env fora do Git e .env.example versionado                                                                                                                            
+[ OK ] A4 5+ commits e remoto no GitHub (encontrados: 10)                                                                                                                       
 [ OK ] A5 imagem gabesant/agrovale-portal:1.0-261217952 pública no Docker Hub                                                                                                   
                                                                                                                                                                                 
 B. Stack em execução
@@ -114,9 +118,4 @@ C. Conteúdo e persistência
 [ OK ] C1 portal mostra seu nome e sua matrícula
 [ OK ] C2 WordPress instalado com a matrícula no título do site
 [ OK ] C3 post sobreviveu à recriação do blog (post 2026-10-06T01:04:02 · container 2026-10-06T01:06:16)
-
-================================================================
- Resultado: 15/16 verificações
- Ainda há falhas. Corrija e rode de novo.
-================================================================
 ```
