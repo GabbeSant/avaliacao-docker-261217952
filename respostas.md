@@ -24,11 +24,17 @@ total 12
 -rwxr-xr-x    1 root     root          1297 Oct  5 23:34 estilo.css
 -rwxr-xr-x    1 root     root          2277 Oct  5 23:52 index.html
 "
+
 ## Parte 2 · Docker Hub
 
 3. Nome completo da imagem publicada e link público do repositório no Docker Hub.
+Repo: gabesant/agrovale-portal
+Tag: 1.0-261217952
+Nome completo da imagem: gabesant/agrovale-portal:1.0-261217952
+Link do Repo: https://hub.docker.com/r/gabesant/agrovale-portal
 
 4. Por que o `docker login` foi feito com um token de acesso e não com a senha da conta?
+R: Porque o token de acesso é mais seguro do que utilizar diretamente a senha da conta. 
 
 ## Parte 3 · Página de manutenção
 
