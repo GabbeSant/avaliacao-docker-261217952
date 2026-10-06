@@ -42,19 +42,35 @@ R: Porque o token de acesso é mais seguro do que utilizar diretamente a senha d
 
 | # | Instrução | O que estava errado | O que você viu acontecer | Como corrigiu |
 |---|---|---|---|---|
-| 1 | | | | |
-| 2 | | | | |
-| 3 | | | | |
-
+| 1 | COPY | O arquivo `site/index.html` não estava sendo copiado para a imagem. | O container iniciou normalmente, mas apareceu a página padrão "Welcome to nginx!". | Adicionei uma instrução `COPY` para copiar a página de manutenção para o diretório servido pelo Nginx. |
+| 2 | WORKDIR/COPY | O arquivo foi copiado para `/usr/share/nginx`, mas o Nginx serve o conteúdo de `/usr/share/nginx/html`. | Mesmo após adicionar o `COPY`, continuou aparecendo a página padrão do Nginx. | Corrigi o diretório de destino para `/usr/share/nginx/html`. |
+| 3 | EXPOSE | A porta 80 não estava documentada explicitamente no Dockerfile. | O container funcionou porque a imagem base do Nginx já expõe a porta 80, então não houve erro visível na execução. | Adicionei `EXPOSE 80` para deixar a porta do serviço declarada explicitamente no Dockerfile. |
 6. Qual a diferença entre `-p 7042:80` e `-p 80:7042` no `docker run`? Qual dos dois números é a porta do container?
+R: A opção `-p` segue o formato `porta_do_host:porta_do_container`. Em `-p 7042:80`, a porta 7042 é a porta acessada no computador e a porta 80 é a porta dentro do container.Em `-p 80:7042`, a porta 80 seria a porta do computador e a 7042 seria a porta interna do container. A porta do container, no caso do Nginx, é a porta 80.
 
 ## Parte 4 · docker-compose.yml
 
 7. No serviço `blog`, por que `WORDPRESS_DB_HOST` recebe `db` e não `localhost`?
+No serviço `blog`, `WORDPRESS_DB_HOST` recebe `db` porque, dentro da rede do Docker Compose, os serviços se comunicam pelo nome do serviço. Se fosse usado `localhost`, o WordPress tentaria acessar o banco dentro do próprio container do blog, e não no container `db`.
 
 8. Por que o serviço `db` não publica a porta 3306? Se precisar consultar o banco, como faz sem publicar
    a porta? Mostre o comando.
+O serviço `db` não publica a porta 3306 porque o banco só precisa ser acessado internamente pelos containers da mesma rede do Docker Compose, evitando expor o MariaDB no host.
+Para consultar o banco sem publicar a porta, usei:
+`docker compose exec db mariadb -u root -p`
+O comando abriu o cliente MariaDB dentro do container do serviço `db`.
+"PS C:\Users\Aluno\Downloads\01.A - Projeto_Avaliação\01.1 - Projeto_Avaliação\avaliacao-docker-agrovale> docker compose exec db mariadb -u root -p
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 12
+Server version: 11.4.13-MariaDB-ubu2404 mariadb.org binary distribution
 
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> exit
+Bye"
 ## Parte 5 · Persistência
 
 9. Quais comandos você usou para derrubar e subir a stack? Qual comando teria apagado o post que você criou,
